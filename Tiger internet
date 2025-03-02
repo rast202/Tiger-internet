@@ -1,0 +1,178 @@
+using System;
+using System.IO;
+using System.Threading.Tasks;
+
+namespace TigerInternet
+{
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            Console.WriteLine("Tiger Internet Security is starting...");
+
+            // 設置開機自動運行
+            SetStartup();
+
+            // 開始掃描磁碟
+            await ScanDisks();
+
+            // 保持在背景運行
+            while (true)
+            {
+                await Task.Delay(10000); // 每10秒檢查一次
+                // 檢查可疑程式
+                CheckSuspiciousPrograms();
+            }
+        }
+
+        static void SetStartup()
+        {
+            // 設置開機自動運行的代碼
+            // 這裡需要根據不同平台進行實現
+            Console.WriteLine("Setting up startup...");
+        }
+
+        static async Task ScanDisks()
+        {
+            // 簡單的磁碟掃描邏輯
+            Console.WriteLine("Scanning disks...");
+            string[] drives = Environment.GetLogicalDrives();
+            foreach (var drive in drives)
+            {
+                await ScanDirectory(drive);
+            }
+        }
+
+        static async Task ScanDirectory(string path)
+        {
+            try
+            {
+                foreach (var file in Directory.GetFiles(path))
+                {
+                    // 假設CheckForVirus是一個檢查病毒的函數
+                    if (CheckForVirus(file))
+                    {
+                        BlockFile(file);
+                    }
+                }
+
+                foreach (var directory in Directory.GetDirectories(path))
+                {
+                    await ScanDirectory(directory);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error scanning directory {path}: {ex.Message}");
+            }
+        }
+
+        static bool CheckForVirus(string file)
+        {
+            // 簡單的病毒檢查邏輯
+            // 實際應用中需要更複雜的檢查
+            return file.EndsWith(".virus");
+        }
+
+        static void BlockFile(string file)
+        {
+            // 封鎖病毒文件的邏輯
+            Console.WriteLine($"Virus found and blocked: {file}");
+        }
+
+        static void CheckSuspiciousPrograms()
+        {
+            // 檢查可疑程式的邏輯
+            Console.WriteLine("Checking for suspicious programs...");
+        }
+    }
+}
+using System;
+using System.IO;
+using System.Threading.Tasks;
+
+namespace TigerInternet
+{
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            Console.WriteLine("Tiger Internet Security is starting...");
+
+            // 設置開機自動運行
+            SetStartup();
+
+            // 開始掃描磁碟
+            await ScanDisks();
+
+            // 保持在背景運行
+            while (true)
+            {
+                await Task.Delay(10000); // 每10秒檢查一次
+                // 檢查可疑程式
+                CheckSuspiciousPrograms();
+            }
+        }
+
+        static void SetStartup()
+        {
+            // 設置開機自動運行的代碼
+            // 這裡需要根據不同平台進行實現
+            Console.WriteLine("Setting up startup...");
+        }
+
+        static async Task ScanDisks()
+        {
+            // 簡單的磁碟掃描邏輯
+            Console.WriteLine("Scanning disks...");
+            string[] drives = Environment.GetLogicalDrives();
+            foreach (var drive in drives)
+            {
+                await ScanDirectory(drive);
+            }
+        }
+
+        static async Task ScanDirectory(string path)
+        {
+            try
+            {
+                foreach (var file in Directory.GetFiles(path))
+                {
+                    // 假設CheckForVirus是一個檢查病毒的函數
+                    if (CheckForVirus(file))
+                    {
+                        BlockFile(file);
+                    }
+                }
+
+                foreach (var directory in Directory.GetDirectories(path))
+                {
+                    await ScanDirectory(directory);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error scanning directory {path}: {ex.Message}");
+            }
+        }
+
+        static bool CheckForVirus(string file)
+        {
+            // 簡單的病毒檢查邏輯
+            // 實際應用中需要更複雜的檢查
+            return file.EndsWith(".virus");
+        }
+
+        static void BlockFile(string file)
+        {
+            // 封鎖病毒文件的邏輯
+            Console.WriteLine($"Virus found and blocked: {file}");
+        }
+
+        static void CheckSuspiciousPrograms()
+        {
+            // 檢查可疑程式的邏輯
+            Console.WriteLine("Checking for suspicious programs...");
+        }
+    }
+}
